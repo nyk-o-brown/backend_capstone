@@ -149,4 +149,4 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-AUTH_USER_MODEL = 'apps_users.User'  # if your app label is 'apps.users', app_label makes it 'users'? Use the app label used in AppConfig
+AUTH_USER_MODEL = 'apps_users.User','users.User'  # if your app label is 'apps.users', app_label makes it 'users'? Use the app label used in AppConfig
