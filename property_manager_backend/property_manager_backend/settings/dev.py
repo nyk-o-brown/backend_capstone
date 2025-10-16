@@ -10,7 +10,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Optionally load additional local env vars from a .env file
 try:
-    from dotenv import load_dotenv
+    from dot
+    env import load_dotenv
     load_dotenv(os.path.join(BASE_DIR, '.env'))
 except Exception:
     pass
