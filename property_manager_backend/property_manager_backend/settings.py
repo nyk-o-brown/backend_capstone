@@ -150,3 +150,7 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'apps_users.User','users.User'  # if your app label is 'apps.users', app_label makes it 'users'? Use the app label used in AppConfig
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
