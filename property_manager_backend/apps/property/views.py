@@ -10,16 +10,10 @@ from rest_framework import viewsets, permissions
 from .models import Property
 from .serializers import PropertySerializer
 
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.owner == request.user or request.user.is_staff
-
 class PropertyViewSet(viewsets.ModelViewSet):
-    queryset = Property.objects.select_related("owner").all()
+    queryset = Property.objects.all()
     serializer_class = PropertySerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [permissions.AllowAny]  # allows GET to anonymous
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
