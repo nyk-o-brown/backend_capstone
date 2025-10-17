@@ -65,7 +65,7 @@ ROOT_URLCONF = 'property_manager_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,17 +139,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True  # dev only; lock down in prod
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
+    # Option A: allow unauthenticated READ, require auth for unsafe methods
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        # add JWT auth if you use it:
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
-AUTH_USER_MODEL = 'apps_users.User','users.User'  # if your app label is 'apps.users', app_label makes it 'users'? Use the app label used in AppConfig
+# Use your custom user model (single string). If your app label is `users`:
+AUTH_USER_MODEL = 'users.User'
 
 
 MEDIA_URL = '/media/'

@@ -3,7 +3,7 @@ from django.db import models
 
 class User(AbstractUser):
     # Custom fields
-    phone = models.CharField(max_length=20, blank=True, null=True)
+    phone = models.CharField(max_length=30, blank=True, null=True)
 
     # Override groups and user_permissions with custom related_names
     groups = models.ManyToManyField(
@@ -24,3 +24,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
+
+
+
+

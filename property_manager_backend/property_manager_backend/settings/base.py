@@ -22,6 +22,8 @@ INSTALLED_APPS = [
 
 # Local apps
 INSTALLED_APPS += [
+    'rest_framework',
+    'corsheaders',
     'apps.users',
     'apps.property',
 ]
@@ -41,14 +43,20 @@ ROOT_URLCONF = 'property_manager_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / 'templates'],  # keep your global templates
+        'APP_DIRS': True,                  # <-- must be True so DRF templates are found
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # if you must use explicit loaders, include app_directories loader:
+            # 'loaders': [
+            #     'django.template.loaders.filesystem.Loader',
+            #     'django.template.loaders.app_directories.Loader',
+            # ],
         },
     },
 ]
@@ -94,3 +102,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = 'users.User'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    # ...other DRF settings...
+}
