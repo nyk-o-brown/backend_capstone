@@ -32,7 +32,7 @@ urlpatterns = [
     path('users/', include('apps.users.urls')),
     ####
     path("/users/", include("apps.users.urls")),
-    path("/properties/", include("apps.property.urls")),
+    path("/property/", include("apps.property.urls")),
 ]
 
 if settings.DEBUG:

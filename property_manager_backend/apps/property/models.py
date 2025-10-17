@@ -13,10 +13,10 @@ from django.conf import settings
 #    image = models.ImageField(upload_to='property_images/')
 
 def property_image_path(instance, filename):
-    return f"properties/{instance.owner.id}/{filename}"
+  return f"property/{instance.owner.id}/{filename}"
 
 class Property(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="properties")
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="property")
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=255)
     photo = models.ImageField(upload_to=property_image_path, null=True, blank=True)
@@ -24,3 +24,4 @@ class Property(models.Model):
 
     def __str__(self):
         return self.name
+
