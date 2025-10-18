@@ -1,6 +1,25 @@
-<h2>Properties</h2>
-<ul>
+{% extends "base.html" %}
+{% block title %}Properties{% endblock %}
+{% block content %}
+<h2 class="mb-4">Properties</h2>
+<div class="mb-3">
+  <a href="#" class="btn btn-success">➕ Add Property</a>
+</div>
+<div class="row">
   {% for prop in properties %}
-    <li>{{ prop.name }} - {{ prop.location }}</li>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ prop.name }}</h5>
+          <p class="card-text">{{ prop.location }}</p>
+          <small class="text-muted">Owner ID: {{ prop.owner }}</small>
+          <div class="d-flex justify-content-between mt-3">
+            <a href="#" class="btn btn-primary btn-sm">✏️ Edit</a>
+            <a href="#" class="btn btn-danger btn-sm">🗑️ Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
   {% endfor %}
-</ul>
+</div>
+{% endblock %}

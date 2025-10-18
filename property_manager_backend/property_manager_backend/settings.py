@@ -143,7 +143,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # dev only; lock down in prod
 REST_FRAMEWORK = {
     # Option A: allow unauthenticated READ, require auth for unsafe methods
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',

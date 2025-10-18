@@ -13,3 +13,7 @@ def properties_view(request):
     response = requests.get('http://127.0.0.1:8000/property/')
     properties = response.json()
     return render(request, 'properties.html', {'properties': properties})
+
+
+
+

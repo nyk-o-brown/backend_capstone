@@ -5,6 +5,9 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from django.contrib.auth import get_user_model
 from .serializers import UserSerializer
+
+#
+from rest_framework.permissions import AllowAny
 #def user_list(request):
 #    return HttpResponse("User list")
 #
@@ -21,8 +24,10 @@ class IsAdminOrSelf(permissions.BasePermission):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
-    def get_permissions(self):
-        if self.action in ("list", "create"):
-            return [permissions.IsAdminUser()]
-        return [permissions.IsAuthenticated(), IsAdminOrSelf()]
+    
+
+
+ 
+    
