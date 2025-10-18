@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+from django.shortcuts import redirect, render
 
 
 def home(request):
-    return HttpResponse("Welcome to Property Manager")
+    return render(request, 'home.html')  # We'll create this template next
 
 
 urlpatterns = [

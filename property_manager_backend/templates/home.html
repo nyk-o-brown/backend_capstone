@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h2 class="mb-4">🏠 Welcome to Property Manager</h2>
+<p class="lead">Choose where to go:</p>
+<div class="d-flex gap-3">
+  <a href="{% url 'users_ui' %}" class="btn btn-primary">👥 View Users</a>
+  <a href="{% url 'properties_ui' %}" class="btn btn-success">🏢 View Properties</a>
+</div>
+{% endblock %}
