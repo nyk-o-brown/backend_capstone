@@ -33,6 +33,8 @@ urlpatterns = [
     ####
     path("/users/", include("apps.users.urls")),
     path("/property/", include("apps.property.urls")),
+    path('', include('frontend.urls')),
+
 ]
 
 if settings.DEBUG:
