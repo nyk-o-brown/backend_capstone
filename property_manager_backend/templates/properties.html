@@ -1,25 +1,47 @@
 {% extends "base.html" %}
 {% block title %}Properties{% endblock %}
+
 {% block content %}
-<h2 class="mb-4">Properties</h2>
+<h2 class="mb-4">🏢 Properties</h2>
+
 <div class="mb-3">
   <a href="{% url 'add_property' %}" class="btn btn-success">➕ Add Property</a>
 </div>
+
 <div class="row">
   {% for prop in properties %}
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
           <h5 class="card-title">{{ prop.name }}</h5>
           <p class="card-text">{{ prop.location }}</p>
-          <small class="text-muted">Owner ID: {{ prop.owner }}</small>
-          <div class="d-flex justify-content-between mt-3">
+
+          <h6 class="mt-3">Units:</h6>
+          <ul class="list-group list-group-flush">
+            {% for unit in prop.units.all %}
+              <li class="list-group-item">
+                {{ unit.name }} (Floor: {{ unit.floor }})
+                {% if unit.tenant %}
+                  – Tenant: {{ unit.tenant.username }}
+                {% else %}
+                  – <em>Vacant</em>
+                {% endif %}
+              </li>
+            {% empty %}
+              <li class="list-group-item text-muted">No units yet.</li>
+            {% endfor %}
+          </ul>
+
+          <div class="mt-3 d-flex justify-content-between">
             <a href="{% url 'edit_property' prop.id %}" class="btn btn-primary btn-sm">✏️ Edit</a>
             <a href="{% url 'delete_property' prop.id %}" class="btn btn-danger btn-sm">🗑️ Delete</a>
+            <a href="{% url 'property_users' prop.id %}" class="btn btn-outline-primary btn-sm">👥 View Tenants</a>
           </div>
         </div>
       </div>
     </div>
   {% endfor %}
 </div>
+
+<a href="{% url 'home' %}" class="btn btn-secondary mt-4">← Back to Home</a>
 {% endblock %}

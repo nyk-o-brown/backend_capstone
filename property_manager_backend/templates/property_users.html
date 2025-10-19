@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Tenants for {{ property.name }}{% endblock %}
+{% block content %}
+<h2>Tenants at {{ property.name }}</h2>
+<ul>
+  {% for unit in units %}
+    <li>{{ unit.name }} – {% if unit.tenant %}{{ unit.tenant.username }}{% else %}<em>Vacant</em>{% endif %}</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'properties_ui' %}" class="btn btn-secondary mt-3">← Back to Properties</a>
+{% endblock %}

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Property
+from .models import Unit
 
 class PropertySerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(read_only=True)
@@ -15,3 +16,8 @@ class PropertySerializer(serializers.ModelSerializer):
         if obj.photo and request:
             return request.build_absolute_uri(obj.photo.url)
         return None
+
+class UnitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Unit
+        fields = '__all__'

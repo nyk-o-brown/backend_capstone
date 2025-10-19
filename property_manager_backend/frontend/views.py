@@ -67,3 +67,8 @@ def delete_property(request, pk):
     prop = get_object_or_404(Property, pk=pk)
     prop.delete()
     return redirect('properties_ui')
+
+def property_users_view(request, pk):
+    property = get_object_or_404(Property, pk=pk)
+    units = property.units.select_related('tenant')
+    return render(request, 'property_users.html', {'property': property, 'units': units})
